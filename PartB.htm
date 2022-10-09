@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" type="text/css" href="../../../Desktop/Rain%20Robotics/Term%202/Project%201/ESP_TEMPWEB_SERVOCNTRL/DATA/style.css">
+<script
+src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+</script>
+
+</head>
+<body link="#FF0000" vlink="#008000" alink="#800000" background="../../../Downloads/IMG_0768.gif">
+<h1><font color="#008000"><span style="background-color: #FF00FF">ESP32 with Servo</span></font></h1>
+<p><span style="background-color: #FF00FF">Position: </span> <span id="servoPos"></span></p>
+<input type="range" min="0" max="180" class="slider" id="servoSlider"
+onchange="servo(this.value)"/>
+<script>
+var slider = document.getElementById("servoSlider");
+var servoP = document.getElementById("servoPos");
+servoP.innerHTML = slider.value;
+slider.oninput = function() {
+slider.value = this.value;
+servoP.innerHTML = this.value;
+}
+$.ajaxSetup({timeout:1000});
+function servo(pos) {
+$.get("/?value=" + pos + "&");
+{Connection: close};
+}
+</script>
+</body>
+</html>

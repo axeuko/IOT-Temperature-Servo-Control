@@ -1,0 +1,59 @@
+<!DOCTYPE>
+<html>
+
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data;,">
+<link rel="icon" type="image/png" href= "">
+<script language="JavaScript">
+<!--
+function FP_swapImg() {//v1.0
+ var doc=document,args=arguments,elm,n; doc.$imgSwaps=new Array(); for(n=2; n<args.length;
+ n+=2) { elm=FP_getObjectByID(args[n]); if(elm) { doc.$imgSwaps[doc.$imgSwaps.length]=elm;
+ elm.$src=elm.src; elm.src=args[n+1]; } }
+}
+
+function FP_preloadImgs() {//v1.0
+ var d=document,a=arguments; if(!d.FP_imgs) d.FP_imgs=new Array();
+ for(var i=0; i<a.length; i++) { d.FP_imgs[i]=new Image; d.FP_imgs[i].src=a[i]; }
+}
+
+function FP_getObjectByID(id,o) {//v1.0
+ var c,el,els,f,m,n; if(!o)o=document; if(o.getElementById) el=o.getElementById(id);
+ else if(o.layers) c=o.layers; else if(o.all) el=o.all[id]; if(el) return el;
+ if(o.id==id || o.name==id) return o; if(o.childNodes) c=o.childNodes; if(c)
+ for(n=0; n<c.length; n++) { el=FP_getObjectByID(id,c[n]); if(el) return el; }
+ f=o.forms; if(f) for(n=0; n<f.length; n++) { els=f[n].elements;
+ for(m=0; m<els.length; m++){ el=FP_getObjectByID(id,els[n]); if(el) return el; } }
+ return null;
+}
+// -->
+</script>
+</head>
+
+<body link="#990033" vlink="#008080" alink="#339966" text="#336600" bgcolor="#FF9999" onload="FP_preloadImgs(/*url*/'button4.jpg',/*url*/'button5.jpg')">
+
+<p align="center"><b><i><font face="Courier New" size="7">WELCOME TO MY PROJECT
+</font></i></b></p>
+<h1 align="center"><font size="4"><span style="font-weight: 400">This project 
+can be divided into two parts.</span></font></h1>
+<p align="left">&nbsp;</p>
+<p align="center"><i><font face="Candara">PART A:</font></i></p>
+<p align="center"><font face="Candara">The first part of this project required 
+me to chart the data from a temperature sensor onto a webpage.&nbsp; </font></p>
+<p align="center"><font face="Candara">&nbsp; <a href="PartA.htm">
+<img border="0" id="img1" src="button3.jpg" height="20" width="100" alt="Click Here " onmouseover="FP_swapImg(1,0,/*id*/'img1',/*url*/'button4.jpg')" onmouseout="FP_swapImg(0,0,/*id*/'img1',/*url*/'button3.jpg')" onmousedown="FP_swapImg(1,0,/*id*/'img1',/*url*/'button5.jpg')" onmouseup="FP_swapImg(0,0,/*id*/'img1',/*url*/'button4.jpg')" fp-style="fp-btn: Embossed Capsule 8" fp-title="Click Here "></a>&nbsp;&nbsp; 
+To find out if i was able to do that.</font></p>
+<p align="center">&nbsp;</p>
+<p align="left">&nbsp;</p>
+<p align="center"><i><font face="Candara">PART B:</font></i></p>
+<p align="center"><font face="Candara">The second part of this project required 
+me to control a servomotor using a slider on a Webpage.&nbsp; </font></p>
+<p align="center"><font face="Candara"><a href="PartB.htm">
+<img border="0" id="img2" src="button3.jpg" height="20" width="100" alt="Click Here " onmouseover="FP_swapImg(1,0,/*id*/'img2',/*url*/'button4.jpg')" onmouseout="FP_swapImg(0,0,/*id*/'img2',/*url*/'button3.jpg')" onmousedown="FP_swapImg(1,0,/*id*/'img2',/*url*/'button5.jpg')" onmouseup="FP_swapImg(0,0,/*id*/'img2',/*url*/'button4.jpg')" fp-style="fp-btn: Embossed Capsule 8; fp-orig: 0" fp-title="Click Here "></a>&nbsp;&nbsp; 
+To find out if i was able to do that.</font></p>
+<p align="center">&nbsp;</p>
+
+</body>
+
+</html>
