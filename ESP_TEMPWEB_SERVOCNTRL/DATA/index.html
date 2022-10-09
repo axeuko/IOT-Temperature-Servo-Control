@@ -1,0 +1,189 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <title> TLOT's TEMPERATURE & SERVO CONTROL</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href= "favicon.png">
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+</script>
+</head>
+
+
+<body link="#990033" vlink="#008080" alink="#339966" text="#336600" bgcolor="#FF9999">
+
+  <p align="center"><b><i><font face="Courier New" size="7">WELCOME TO MY PROJECT
+  </font></i></b></p>
+  <h1 align="center">  TLOT's TEMPERATURE & SERVO CTRL </h1>
+  <h2 align="center"><font size="4"><span style="font-weight: 400">This project 
+  can be divided into two parts.</span></font></h1>
+  <p align="left">&nbsp;</p>
+  <p align="center"><i><font face="Candara">PART A:</font></i></p>
+  <p align="center"><font face="Candara">The first part of this project required 
+  me to chart the data from a temperature sensor onto a webpage.&nbsp; </font></p>
+  <p align="center"><font face="Candara">&nbsp;To find out if i was able to do that 
+  Look below.</font></p>
+  </body>
+  
+  <body>
+  <div class="topnav">
+
+  </div>
+  <div class= "content">
+  <div class= "card-grid">
+  <div class= "card">
+  <p class= "card-title" align="center"> <i>Temperature From DS18B20 Sensor </i> </p>
+  
+  <div id= "chart-temperature" class="chart-container"> </div>
+  </div>
+  </div>
+  </div>
+  
+  <script>
+  
+  window.addEventListener('load', getReadings);
+  
+  // Create Temperature Chart
+  var chartT = new Highcharts.Chart({
+    chart:{
+      renderTo:'chart-temperature'
+    },
+    series: [
+      {
+        name: 'Temperature In Celcius',
+        type: 'line',
+        color: '#101D42',
+        marker: {
+          symbol: 'circle',
+          radius: 3,
+          fillColor: '#101D42',
+        }
+      },
+     // {
+      //  name: 'Temperature In Farenhiet',
+     /*   type: 'line',
+        color: '#00A6A6',
+        marker: {
+          symbol: 'diamond',
+          radius: 3,
+          fillColor: '#00A6A6',
+        }
+      },*/
+      
+    ],
+    title: {
+      text: undefined
+    },
+    xAxis: {
+      type: 'datetime',
+      dateTimeLabelFormats: { second: '%H:%M:%S' }
+    },
+    yAxis: {
+      title: {
+        text: 'Temperature Celsius/Farenhiet Degrees'
+      }
+    },
+   // Highcharts.setOptions({
+  //time: {
+  //timezoneOffset: -60
+  //}
+   // });
+    credits: {
+      enabled: false
+    }
+  });
+  
+  
+  //Plot temperature in the temperature chart
+  function plotTemperature(jsonValue) {
+  
+    var keys = Object.keys(jsonValue);
+    console.log(keys);
+    console.log(keys.length);
+  
+    for (var i = 0; i < keys.length; i++){
+      var x = (new Date()).getTime();
+      console.log(x);
+      const key = keys[i];
+      var y = Number(jsonValue[key]);
+      console.log(y);
+  
+      if(chartT.series[i].data.length > 40) {
+        chartT.series[i].addPoint([x, y], true, true, true);
+      } else {
+        chartT.series[i].addPoint([x, y], true, false, true);
+      }
+  
+    }
+  }
+  
+  // Function to get current readings on the webpage when it loads for the first time
+  function getReadings(){
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        var myObj = JSON.parse(this.responseText);
+        console.log(myObj);
+        plotTemperature(myObj);
+      }
+    };
+    xhr.open("GET", "/readings", true);
+    xhr.send();
+  }
+  
+  if (!!window.EventSource) {
+    var source = new EventSource('/events');
+  
+    source.addEventListener('open', function(e) {
+      console.log("Events Connected");
+    }, false);
+  
+    source.addEventListener('error', function(e) {
+      if (e.target.readyState != EventSource.OPEN) {
+        console.log("Events Disconnected");
+      }
+    }, false);
+  
+    source.addEventListener('message', function(e) {
+      console.log("message", e.data);
+    }, false);
+  
+    source.addEventListener('new_readings', function(e) {
+      console.log("new_readings", e.data);
+      var myObj = JSON.parse(e.data);
+      console.log(myObj);
+      plotTemperature(myObj);
+    }, false);
+  }
+  </script>
+  </body>
+
+<body z-index="950" link="#FF0000" vlink="#008000" alink="#800000">
+    
+<p align="center">&nbsp;</p>
+<p align="left">&nbsp;</p>
+<p align="center"><i><font face="Candara">PART B:</font></i></p>
+<p align="center"><font face="Candara">This part of this project required 
+me to control a servomotor.&nbsp; </font></p>
+<p align="center"><font face="Candara">&nbsp;&nbsp; 
+To find out if i was able to do that look below.</font></p>
+
+
+<form align="center" action="/get" class="box" id="my-form"> 
+      
+      
+<h1 align="center"><font color="#008000"><span style="background-color: #FF00FF">Turn the Servo yourself!</span></font></h1>
+<p  align="center"><label><span style="background-color: #FF00FF">Enter Desired Position: </span> <span class="slider" id="servoSlider"> </span></label><br/></p>
+<div class="part">
+<input name="servoangle" align="center" type="number" min="0" max="180" placeholder="ServoAngle"><br/>
+</div>
+<input align="center" type="submit" value="SUBMIT" /><br/>
+
+</form>
+</body>
+</html>
