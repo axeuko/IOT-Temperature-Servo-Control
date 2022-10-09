@@ -4,3 +4,6 @@ The task here was to create a site page that displays temperature readings from 
 The setup for this project includes:- ESP32 Microcontroller, Arduino IDE, DS18B20 Temperature sensor probe, SG90 Servomotor.
 
 The project files were hosted on the ESP32's Serial Peripheral Interface Flash File System (SPIFFS)
+
+The information from the temperature sensor is sent to an online library called the highcharts library, after the data is processed the chart is then displayed on my webpage.
+
